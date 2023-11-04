@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danger Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            background: rgba(255, 0, 0, 0.1); /* Light red translucent background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .card {
+            width: 18rem;
+            border: 2px solid #ff0000; /* Red border */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .btn-danger {
+            background-color: #ff0000; /* Red background color */
+            border-color: #ff0000;
+            color: #fff; /* White text color */
+            margin-right: 15px; /* Increased margin between buttons */
+            font-weight: bold; /* Bold font */
+            font-size: 18px; /* Font size */
+        }
+
+        .btn-danger:hover {
+            background-color: #cc0000; /* Darker red on hover */
+            border-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <img src="Racoon logo.png" alt="Logo" class="img-fluid mx-auto d-block" width="400" height="400">
+    <!-- Danger Card -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title text-danger">Notice!!!</h5>
+            <p class="card-text">Are you sure to continue this transaction as this transaction is irreversible !!!</p>
+            <button class="btn btn-danger">Cancel</button>
+            <button class="btn btn-danger">Proceed</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
