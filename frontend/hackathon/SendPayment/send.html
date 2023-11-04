@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Banking Portal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(50% 123.47% at 50% 50%, #00ff94 0%, #720059 100%),
+                      linear-gradient(121.28deg, #669600 0%, #ff0000 100%),
+                      linear-gradient(360deg, #0029ff 0%, #8fff00 100%),
+                      radial-gradient(100% 164.72% at 100% 100%, #6100ff 0%, #00ff57 100%),
+                      radial-gradient(100% 148.07% at 0% 0%, #fff500 0%, #51d500 100%);
+            background-blend-mode: screen, color-dodge, overlay, difference, normal;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .navbar {
+            width: 100%;
+            border-radius: 0;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .card {
+            margin-top: 2rem;
+            border-radius: 10px;
+            font-size: 18px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            border-radius: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">SenderName</a>
+        <a class="navbar-brand" href="#">SenderAddress</a>
+        <a class="navbar-brand" href="#">GasPrice</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2 class="text-center mb-4">Payment Portal</h2>
+
+        <!-- Payment Form -->
+        <div class="card">
+            <div class="card-body">
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="receiverName">Receiver Name:</label>
+                        <input type="text" class="form-control" id="receiverName" placeholder="Enter receiver's name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="receiverAddress">Receiver Address:</label>
+                        <input type="text" class="form-control" id="receiverAddress" placeholder="Enter receiver's address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMode">Payment Mode:</label>
+                        <select class="form-control" id="paymentMode" required>
+                            <option value="creditCard">Credit Card</option>
+                            <option value="debitCard">Debit Card</option>
+                        </select>
+                    </div>
+
+                    <!-- Credit Card Fields -->
+                    <div id="creditCardFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number:</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="Enter card number">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="expDate">Expiration Date:</label>
+                                <input type="text" class="form-control" id="expDate" placeholder="MM/YYYY">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="cvv">CVV:</label>
+                                <input type="text" class="form-control" id="cvv" placeholder="Enter CVV">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('paymentMode').addEventListener('change', function () {
+            var creditCardFields = document.getElementById('creditCardFields');
+
+            if (this.value === 'creditCard' || this.value === 'debitCard') {
+                creditCardFields.style.display = 'block';
+            } else {
+                creditCardFields.style.display = 'none';
+            }
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var receiverName = document.getElementById('receiverName').value;
+            var receiverAddress = document.getElementById('receiverAddress').value;
+            var paymentMode = document.getElementById('paymentMode').value;
+
+            if (paymentMode === 'creditCard' || paymentMode === 'debitCard') {
+                var cardNumber = document.getElementById('cardNumber').value;
+                var expDate = document.getElementById('expDate').value;
+                var cvv = document.getElementById('cvv').value;
+
+                console.log('Credit Card Details:');
+                console.log('Card Number:', cardNumber);
+                console.log('Expiration Date:', expDate);
+                console.log('CVV:', cvv);
+            }
+
+            alert('Payment submitted successfully!');
+        });
+    </script>
+</body>
+</html>
