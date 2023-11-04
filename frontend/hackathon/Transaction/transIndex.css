@@ -2,19 +2,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     min-height: 100vh;
     margin: 0;
 }
 
-.navbar {
+/* .navbar {
     width: 100%;
-}
+} */
 
 .transaction-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px; /* Adjust as needed */
+    text-align: center; /* Optional: Centers the content within the container */
 }
 
 .card {
