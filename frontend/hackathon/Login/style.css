@@ -1,0 +1,29 @@
+body {
+    background: linear-gradient(45deg, #f06, #00f, rgb(255, 153, 0), #f06);
+    background-size: 400% 400%;
+    animation: gradientShift 9s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400vh;
+    border-radius: 20;
+}
+.card {
+    border-radius: 20px; /* Adjust the value to change the roundness of the edges */
+    overflow: hidden; /* Ensure content doesn't overflow from rounded corners */
+}
