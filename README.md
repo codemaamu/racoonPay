@@ -43,7 +43,6 @@ The RaccoonPay project has successfully addressed transparency issues in charita
 - Lokchandar
 - Karthik
 - Karthikeyan
-- 
 ## License
 
 This project is licensed under the [GitHub Pro (Personal)]. This subscription offers unlimited private repositories, but it's designed for individual developers and not for business use.
