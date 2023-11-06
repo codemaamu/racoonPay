@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        
+        body {
+            background: radial-gradient(50% 123.47% at 50% 50%, #00ff94 0%, #720059 100%),
+                      linear-gradient(121.28deg, #669600 0%, #ff0000 100%),
+                      linear-gradient(360deg, #0029ff 0%, #8fff00 100%),
+                      radial-gradient(100% 164.72% at 100% 100%, #6100ff 0%, #00ff57 100%),
+                      radial-gradient(100% 148.07% at 0% 0%, #fff500 0%, #51d500 100%);
+            background-blend-mode: screen, color-dodge, overlay, difference, normal;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .card {
+            width: 18rem;
+            border: 2px solid #ff000000; /* Red border */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <img src="{{url_for('static',filename='Racoon.png')}}" alt="Logo" class="img-fluid mx-auto d-block" width="400" height="400">
+    <!-- Danger Card -->
+    <div class="card mt-0">
+        <div class="card-body">
+            <h5 class="card-title text-info text-center">Notice</h5>
+            <p class="card-text text-center justify-content">Are you sure to continue this transaction? This transaction is not reversible</p>
+            <div class="text-center"><button class="btn btn-success" id ='Proceed'>Proceed</button></div> <br>
+            <div class="text-center"><button class="btn btn-danger" id = 'Cancel'>&nbspCancel&nbsp</button></div>
+            
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('Proceed').addEventListener('click', function () {
+                // Redirect to the "send.html" page
+                //window.location.href = 'PayCon.html';
+                onclick= location.href='/transact';
+            });
+    
+            document.getElementById('Cancel').addEventListener('click', function () {
+                // Redirect to the "pastPayments.html" page (replace with the actual page name)
+                window.location.href = '/transIndex';
+            });
+    });
+    
+    </script>
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

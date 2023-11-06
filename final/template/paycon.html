@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Your CSS styles here */
+        body {
+            background: radial-gradient(50% 123.47% at 50% 50%, #00ff94 0%, #720059 100%),
+                      linear-gradient(121.28deg, #669600 0%, #ff0000 100%),
+                      linear-gradient(360deg, #0029ff 0%, #8fff00 100%),
+                      radial-gradient(100% 164.72% at 100% 100%, #6100ff 0%, #00ff57 100%),
+                      radial-gradient(100% 148.07% at 0% 0%, #fff500 0%, #51d500 100%);
+            background-blend-mode: screen, color-dodge, overlay, difference, normal;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .navbar {
+            border-radius: 0;
+        }
+
+        .container {
+            margin-top: 4rem;
+        }
+
+        .card {
+            border-radius: 10px;
+            font-size: 18px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .list-group-item {
+            font-size: 16px;
+            padding: 12px; /* Increase padding for more space */
+            margin-bottom: 8px; /* Add margin-bottom to create gaps between list items */
+        }
+
+        /* Add light background color to strong words */
+        .list-group-item strong {
+            background-color: rgba(255, 255, 255, 0.7); /* Very light background color */
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 18px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        #receiverList {
+            margin-top: 0.375rem;
+        }
+        #receiverList .list-group-item {
+            padding: 0.375rem 0.75rem;
+            border-radius: 0;
+        }
+        .select2-container--default .select2-selection--single {
+            height: auto;
+            padding: 6px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">{{user}}</a>
+        <a class="navbar-brand" href="#">{{SenderAddress}}</a>
+        <a class="navbar-brand" href="#">{{GasPrice}}</a>
+    </nav>
+
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Payment Confirmation</h2>
+
+        <div class="card">
+            <h5 class="card-title">Payment Details</h5>
+            <form id="transactForm" action="/Confirmation" method="POST">
+                <div class="form-group">
+                    <label>Sender's Name:</label>
+                    <ul class="list-group" id="SenderName">
+                        <li class="list-group-item" style="color: black;">{{user}}</li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label>Sender's Address:</label>
+                    <ul class="list-group" id="SenderAddress">
+                        <li class="list-group-item" style="color: black;">{{currentaddress}}</li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="nameSelect">Receiver Name:</label>
+                    <select class="form-control select2" id="nameSelect">
+                        <option value="" selected disabled>Type or Search Name</option>
+                        <option data-receiver="{{receiveraddress[0]}}">{{receivername[0]}}</option>
+                        <option data-receiver="{{receiveraddress[1]}}">{{receivername[1]}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Receiver's Address:</label>
+                    <ul class="list-group" id="receiverList">
+                        <li class="list-group-item" id="receiverAddress" style="color: black;"><span id="receiverLabel"></span> <span id="receiverName"></span></li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="transactionAmountInput">Transaction Amount</label>
+                    <input type="number" class="form-control" id="transactionAmountInput" placeholder="Enter transaction amount" required>
+                </div>
+                <div class="form-group">
+                    <label>Gas Fees:</label>
+                    <ul class="list-group" id="GasFees">
+                        <li class="list-group-item" style="color: black;">50</li>
+                    </ul>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2();
+
+            var initialAddress = $('#nameSelect').find(':selected').data('receiver');
+            $('#receiverName').text(initialAddress);
+
+            $('#nameSelect').on('change', function () {
+                var address = $(this).find(':selected').data('receiver');
+                $('#receiverName').text(address);
+            });
+
+            $('#transactForm').submit(function (event) {
+                event.preventDefault();
+                var name = $('#nameSelect').val();
+                var address = $('#nameSelect').find(':selected').data('receiver');
+                var ethvalue = $('#transactionAmountInput').val(); // Get the value from the input field
+                $.post('/Confirmation', { name: name, address: address, ethvalue: ethvalue }, function (data) {
+                    console.log('POST request sent');
+                });
+                window.location.href= '/danger'            });
+        });
+    </script>
+</body>
+</html>
